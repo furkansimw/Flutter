@@ -1,0 +1,334 @@
+int = sayi
+String = yazi
+double = ondalikli sayi
+List = Listeler
+var = genel
+------------------------------------------------------------
+$-$ isareti "string degiskenler arasina ekleme yapar"
+print("$degisken1 $degisken2"); // cunku stringler toplanamaz
+${burada classtan method veya degisken cekme yada aritmetik islemler yapilabilir 4 islem}
+------------------------------------------------------------
+class -> void 
+var isim = class;
+ulasmak istersek - isim.void;   // void = methot
+------------------------------------------------------------
+final ve const   // degisken turu gerekmez ama kullanilabilir
+sabit degiskenler degistirilemezler ve daha az yer kaplar
+
+final x = 3; 
+x = 4;    	// olamaz cunku yukarida final olarak tanimli
+print(x);     = 3    
+------------------------------------------------------------
+//  yorum satiri - dart tarafindan okunmaz
+/*  blok yorum birden fazla satir icin kullanilabilir  */
+------------------------------------------------------------
+\t 	tab boslugu birakir     
+\n 	bir alt satira iner
+\" 	cift tirnal isareti
+\' 	tek tirnak isareti
+------------------------------------------------------------
+toDouble   	 // bir degiskeni double degiskene cevirir.
+toInt	   	// bir degiskeni int degiskene cevirir.
+toString       // bir degiskeni string degiskene cevirir.
+int.parse     //bir string degiskeni int degiskene cevirir.
+
+var sayi1 = 5;
+var sayi2 = 3.5;
+sayi1 = sayi2.toInt();      // sayi1 = 3
+sayi2 = sayi1.toDouble();   // sayi2 = 5.0
+------------------------------------------------------------	
+import 'dart:io';       // bunu eklmememiz gerekli
+var isim = stdin.readLineSync();   // konsoldan girdi almayi sagliyor
+-------------------------------------------------------------------
+var x = 1;    \\ ${}   degiskenler arasi string deger icinde islem
+var y = 2;
+print("deneme ${x+y}");    = deneme 3
+----------------------------------------------------------------
+Kosullar  &&  Mantik
+==   esittir 		// Sol tarafa sorgulanan		
+!=   esit degildir	// Sag tarafa saglanan yazilir
+>    buyuktur			
+<    kucuktur		var sayi = 2;
+>=   buyuk esittir	if (sayi ==2){dogru}
+<=   kucuk esittir	
+
+&&   VE			 // iki degerinde dogru olmasi gerekir
+||   YADA		 // iki degerden birinin dogru olmasi yeter
+!    Durumu Tersine Cevirir   == else ile karistirma
+------------------------------------------------------------
+if & else  \\ eger & degilse
+if (sayi ==1 || sayi==2){sayi bir ise veya iki ise kod calisacak}
+------------------------------------------------------------
+switch    \\ if else gibi ama cogul kullanimda cok daha iyi
+int sayi;
+switch (sayi){
+  case 1:{ sayi 1 olursa }
+  break; 		// eger yazmaz ise case 2 ye gecer kosulsuz
+  
+  case 2:{ sayi 2 olursa}
+  break;
+
+  default:{hicbirisi olmaz ise}
+  break;
+}
+---------------------------------------------------------------------
+while(degisken<4)
+
+	//egerki degisken 4 un altinda oldugu surece calisir  sira istiyor
+	// isek her calistiginda +1 ekleyecek bir komut ekle ++;
+
+break;   // donguyu hemen bitir
+---------------------------------------------------------------------
+for (var x=0;x<10;x++)   // x'i 0 olarak tanimladik 10dan kucuk olmak sartiyla
+			 //birer sayi articak (++)
+
+if (i == 3){contiune}  // eger 3 olursa (olacak ama pass gecicek).
+---------------------------------------------------------------------
+import 'dart:io';
+// 1 isminiz nedir 2 sayi giriniz 3>> sayi x isim
+void main() {
+    print("isminizi giriniz");
+    var y = stdin.readLineSync();
+
+    print("Tekrar Sayisini Giriniz $y");
+    int x = int.parse(stdin.readLineSync());
+    var z;
+    for (z=0;z<x;z++){
+        print("${z+1} $y");
+    }
+}
+---------------------------------------------------------------------
+while(true)    //sonusz dongu bir giris al ve if ile bagla break komudunu calistir ve bitir
+---------------------------------------------------------------------
+  int min = 0;			// 0-10 arasinda rasgele sayi olusturur.
+  int max = 10;
+  var r = Random();                 // +1 ise minimum sayinin ustune geliyor
+  int rasgele = min+r.nextInt(max-min)+1; // nextInt(ust limit)
+  print("$rasgele");	// min +  r.nextInt(ustlimit)+1
+---------------------------------------------------------------------
+ceil = yukariya yuvarlar (double => int)    3.2 = 4
+floor = asagiya yuvarlar (double => int)    3.5 = 3  	
+sqrt(x) = karekokunu alir.double	    64 = 8
+abs = mutlak deger alir = -2 => 2	    -10 = 10
+pow(x,y) = x uzeri y demek (2,3) = 16;	    = 2³ = 8
+---------------------------------------------------------------------
+class Arabalar{  |void main(){          // bir classtaki verileri method dan okuma,
+  var hiz;	 |var araba = Arabalar();
+  var renk;	 |araba.hiz = 3;    // yada 	int hizi = araba.hiz;
+  var fiyat;	 |print(araba.hiz);   // hizini 3 olarak belirledim
+}		 |}
+---------------------------------------------------------------------
+note! methodsuz degisken degistiremeszsin.
+method parametrelerini string ise "" kullan.
+parametreler method(x) => method(x) olarak kullanilir ve ici bos birakilamaz.
+---------------------------------------------------------------------
+void ile return method(int , String , double)
+arasindaki farklar
+1. void sadece 1 kez islem yapar ve bilgi vermez
+2. return method bilgiyi verir. (1)
+
+Ornek::
+void main(){
+ int deger = sayi();
+ print(deger);    //3
+}
+--
+int sayi(){
+ int sayi1 = 3;
+ return sayi1;
+}
+---------------------------------------------------------------------
+Constructor= yapici method;  ==> class for parameters
+classlarda parametre olmadigi icin sadece class isminde method olusturulur.
+yukarda degiskenlere bu parametrelerle tanimlama yapilir.
+
+class yiyecekler{
+ int elma;
+ int kiraz;
+ int karpuz;
+yiyecekler(int fiyat1,int fiyat2){       // artik cagirilan method parametresi = var's;
+ elma = fiyat1;       // "this." de eklenebilir bu classa ait oludugun belirtir
+ kiraz = fiyat2;
+ karpuz = fiyat2;}
+}
+---
+void main(){
+ var class = yiyecekler(3,5);
+ print(class.elma);    //  3     }
+---------------------------------------------------------------------
+public  &&  private 
+int degisken; // erisilebilir
+int _degisken; // erisilmemez
+---------------------------------------------------------------------
+statick ozelligi
+herhangi bir degiskene veya methoda basina statick eklenir ise nesne tanimlanmadan ulasilabilir.
+// (cok sık kullanilan ifadeler icin kullanilir)
+
+var isim = classismi;  // gerek yok
+var degiskenismi = isim.degisken();    // gerek yok
+---------------------------------------------------------------------
+---------------------------------------------------------------------
+enum class = ayrintisiz class degerleri olusturur // cok pratik 	ENUM
+
+1. enum class olustur virgullerle ayirarak sade deger olustur.
+2. ayri method da =>? (enumclass isim) switch(isim)e bagla
+3. case degerlerini enum ile entegre et.(sade degerler)  // break unutma
+
+enum masa{
+  eco,orta,clas     // simple var's
+}
+void main(){
+  kararmakinesi(masa.eco);    //  stdine baglanabilir String x = stdin.read....
+}
+void kararmakinesi(masa masacik){
+  switch(masacik){
+    case masa.eco:{
+      print("Masaniz eco");
+    }break;
+    case masa.orta:{
+      print("Masaniz orta");
+    }break;
+    case masa.clas:{
+      print("Masaniz clas");
+    }break;
+  }
+}
+---------------------------------------------------------------------
+---------------------------------------------------------------------
+OOP Kurali - Kalitim (Inheritance)
+classlar arasi iliskiyi saglar => extends;
+class x{}  class superx extends x{} class hiperx extends superx{}
+ornek=>  // class , a extented takisi gelir ve Constructor yapisina degiskenleri eklenir )+ :super(extented class degiskeni,..);
+		// artik bu class cagirildiginda extented classtaki degiskenler de gelir !!!    note differen file for import 'package:filename';
+class arac{
+ String renk; 
+ String VitesTuru;  
+		
+ arac(this.renk,this.VitesTuru);    //Constructor parameters
+}
+class araba extented arac{
+ String kasaTipi;
+
+ araba(this.kasaTipi,String renk,String VitesTuru) : super(renk,VitesTuru);
+}
+class marka exdented araba{
+ String model;
+
+ marka(this.model,String kasaTipi) : super(kasaTipi);
+}/// YANI araba classina arac class ekledim.   marka classina arabayi ekledim.  => var's
+---------------------------------------------------------------------
+@override    => bir classtan diger class a method aktarma
+class x{
+void y(){print("x");}
+}                                   // sadece methodlar icin
+class y extends x{
+@override
+void y(){super.y();}
+}
+void main(){
+ var nesneismim = y();
+ y.y();   // y classtan xdeki y methodu cagirildi;
+}
+------------------------------------------------------------------------------------------------------------------------------------------
+PolyMorphism    ==> methodlarda daha kapsayici parametre
+superclass isim = subclass();
+
+4 tane class var.  1 tane Temel (methodunu kullanacagin surekli calisacak) En ust seviye.  
+2 tanesi eleman 1 tanesi yonetici eleman
+butun elemlara temel elemani extends ile bagla
+yonetici elemanin icine ayri method olustur.temel methodu cagir ama parametre key ile   => void x(Temel temel){  temel.method()   };
+void main'e yonetici elemani nesne olustur ve this.void cagir(parametresi 2 tane olusturdugun elemanlardan birini sec)
+
+classlar arasi genisletilmis paylasim ve method paylasimi => PolyMorphism
+
+class x{void...} , class y extends x{bos...} , class z extends x{bos..},class admin extends x{void(x x)x.void(); },void main(){var admin;,admin.void(elemanlar);}
+------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------
+is komutu // tip sorgulama  => var isim = classismi();  if(isim is classimi) // eger isim classismi ise calisir
+-----------------------------------------------------------------------
+as => sorgu command    if ile
+-----------------------------------------------------------------------
+implements    => taslak kaydetme (cok kullanilan classlar icin bir kopya olusturma)   (interface denir)
+
+class x implements taslak{    // note taslak abstract olmak zorundadir.
+ // x'e alt enter yap sonra tum var , void'ler yuklenecek kullanilmasi zorunludur
+// @override gelir tek tek
+}
+-----------------------------------------------------------------------
+Liste olusturma Yonetemleri => 0 dan baslar idler (index)
+
+var sayilar = List();
+var sayilar = new List();
+var sayilar = List<String>();
+var sayilar = [13,21,23];
+
+sayilar.add(3);   // sayilar listesine 3 eklenmis oldu +1 index en sonuna
+sayilar[0] = 3;
+sayilar listesinde'ki 0.index nolu deger 3 ile degistirildi.
+
+var yiyecekler = ["kiraz","karpuz","portakal"];
+yiyecekler.insert(1,"elma");  // 1.indexe elmayi ekler onceki 1 ve daha buyuk degerleri saga kaydirarak +1 index ekler;
+var yiyecekler = ["kiraz","elma","karpuz","portakal"];
+-----------------------------------------------------------------------
+listeden index numarasi girerek listedeki istenen veri nesne olarak tanimlanabilir yada direk kullanabiliriz;
+=> var alfabe = ["a","b","c","d"]
+var nesne = alfabe[0];
+print(nesne);   => a
+print(alfabe[1]);   => b    // liste yonetimi
+print(liste.isNotEmpty);   // icinde veri varmi sorgusu     ^boolean
+print(Liste.isEmpty);     // ici bosmu sorgusu ?            ^boolean
+print(Liste.length);     // liste veri sayisi 
+print(Liste.first);     // listedeki ilk veri
+print(Liste.last);     // listedeki son veri
+print(Liste.contains("varmi?"));   // listede "varmi?" iceriyormu sorgusu
+
+var tersliste = liste.reversed;  // yada direk print icine yazilir
+print(tersliste);   // verilerin indexleri -1 ile carpilir (ters olur);
+-----------------------------------------------------------------------
+***** ornek kod
+void main() {   // listedeki butun verileri yazdirma ve index numaralarini alma
+  var meyveler = List<String>();
+  meyveler = ["x","y","z"];
+  for(var i=0;i<meyveler.length;i++){
+  print("$i. veri = ${meyveler[i]}");   //${meyveler[i]} = meyvelerden 0. index alir yeniler bir attirir. => i++;_i=0
+  }
+}
+-----------------------------------------------------------------------
+Comparator   ile siralama yapmak => class olustur degiskenler ata alt+ins yapici olustur
+mainin icine nesneyi olustur ve var x = class(deger ver);
+Comparator<nesne> siralama1 = (x,y) => x.var1.compareTo(y.var2);
+nesne.sort(siralama1);         // var'lari kucukten buyuge sirala  //sort olmak zorunda
+-----------------------------------------------------------------------
+Iterable   =>  veri kumesi veri arama
+Iterable<Classismi> isim = tanimlanannesne.where((isim){) return isim.cons <> int};
+-----------------------------------------------------------------------
+Liste degistirme =>/\  
+var sayilar = List<int>();   sayilar.add(3),5,6,7,8,9...
+for (var i=0;i<sayilar.length;i++){int sonuc = sayilar[i] * 2; sayilar[i]=sonuc;}
+for (var s in sayilar){print(s);}  //cikarn sonuclari 2 ile carpmak _ list
+-----------------------------------------------------------------------
+Listedeki sayilari cift tek ayirma
+**
+void main(){
+ var sayilar = [3,4,5,6,7,8,9,0];
+ var tekler = List<int>();var ciftler = List<int>();
+ for(var s in sayilar){ //sayilari cek sonuc olustur sayilari 2 ye bol ve 0 ise cift.add_print
+   int sonuc = s % 2;
+   if (sonuc == 0){ciftler.add(s);}if (sonuc == 1){tekler.add(s);}}print(ciftler);print(tekler);}
+-----------------------------------------------------------------------
+Belli bir aralikta sayi uretme => range.Random
+***
+void main(){
+  var sayilar = [];var r = Random();
+  for(var i = 0;i<50;i++){int rasgelesayi =r.nextInt(51);sayilar.add(rasgelesayi);}
+  for(var x in sayilar){print(x);}}   // 0 - 51 arasi 49 tane_i<50
+-----------------------------------------------------------------------
+HashMap => listenin serbet (key) indexli hali
+import 'dart:collection'; // zorunlu
+var ornek1 = HashMap<keyTuru,veriTuru>(); 
+ornek1["keyismi"] = "deger";
+print(ornek1[keyismi]); 
+-----------------------------------------------------------------------
+TextField(keyboardType: TextInputType.datetime)   => numarali klavye acar
+-----------------------------------------------------------------------
+
