@@ -1,6 +1,4 @@
 # Flutter
-Flutter Project
+Flutter Projects
 
 
-
-not defteri.apk open
