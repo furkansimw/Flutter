@@ -1,6 +1,6 @@
 # not_defteri
 
-A new Flutter project.
+First My Flutter project.
 
 ## Getting Started
 not defteri.apk open
