@@ -21,8 +21,6 @@ class _createState extends State<create> {
   @override
   void initState() {
     setState(() {
-      var x = Repositories();
-      x.start();
       cardNumber = Repositories.questions.length.toDouble();
     });
     super.initState();
@@ -32,8 +30,28 @@ class _createState extends State<create> {
   Widget build(BuildContext context) {
     var screen = MediaQuery.of(context).size;
     return Scaffold(
+      backgroundColor: Colors.blue.shade200,
       appBar: AppBar(
         title: Text("Create"),
+        actions: [
+          Padding(
+            padding: EdgeInsets.only(right: screen.width / 20),
+            child: IconButton(
+                tooltip: "start",
+                onPressed: () {
+                  if (Repositories.questions.length != 0) {
+                    Navigator.pushReplacement(context,
+                        MaterialPageRoute(builder: (context) => Home()));
+                  } else {
+                    Fluttertoast.showToast(msg: "you have 0 question");
+                  }
+                },
+                icon: Icon(
+                  Icons.navigate_next,
+                  size: screen.width / 10,
+                )),
+          )
+        ],
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -45,82 +63,79 @@ class _createState extends State<create> {
             Visibility(
               visible: _questions,
               child: Container(
-                height: 250,
-                child: Expanded(
-                  child: ListView.builder(
-                    padding: EdgeInsets.only(top: 5, left: 10),
-                    scrollDirection: Axis.horizontal,
-                    itemCount: cardNumber.toInt(),
-                    itemExtent: 200,
-                    itemBuilder: (context, index) {
-                      return Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 5),
-                        child: GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              questionEdit.text =
-                                  Repositories.questions[index].question;
-                              edit1.text = Repositories.questions[index].a;
-                              edit2.text = Repositories.questions[index].b;
-                              edit3.text = Repositories.questions[index].c;
-                              edit4.text = Repositories.questions[index].d;
-                              cacheReply = Repositories.questions[index].result;
-                              insertNumber.text = (index + 1).toString();
-                            });
-                          },
-                          child: Card(
-                            color: Colors.red,
-                            child: Column(
-                              children: [
-                                IconButton(
-                                    onPressed: () {
-                                      setState(() {
-                                        Repositories.questions.removeAt(index);
-                                        cardNumber = Repositories
-                                            .questions.length
-                                            .toDouble();
-                                      });
-                                    },
-                                    icon: Icon(
-                                      Icons.delete,
-                                      color: Colors.white,
-                                    )),
-                                Text(
-                                  Repositories.questions[index].question,
+                height: screen.height / 2.65,
+                child: ListView.builder(
+                  padding: EdgeInsets.only(top: 5, left: 10),
+                  scrollDirection: Axis.horizontal,
+                  itemCount: cardNumber.toInt(),
+                  itemExtent: 200,
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 5),
+                      child: GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            questionEdit.text =
+                                Repositories.questions[index].question;
+                            edit1.text = Repositories.questions[index].a;
+                            edit2.text = Repositories.questions[index].b;
+                            edit3.text = Repositories.questions[index].c;
+                            edit4.text = Repositories.questions[index].d;
+                            cacheReply = Repositories.questions[index].result;
+                            insertNumber.text = (index + 1).toString();
+                          });
+                        },
+                        child: Card(
+                          color: Colors.red,
+                          child: Column(
+                            children: [
+                              IconButton(
+                                  onPressed: () {
+                                    setState(() {
+                                      Repositories.questions.removeAt(index);
+                                      cardNumber = Repositories.questions.length
+                                          .toDouble();
+                                    });
+                                  },
+                                  icon: Icon(
+                                    Icons.delete,
+                                    color: Colors.white,
+                                  )),
+                              Text(
+                                Repositories.questions[index].question,
+                                style: TextStyle(
+                                    fontSize: 20, color: Colors.white),
+                              ),
+                              Spacer(flex: 10),
+                              Text(
+                                "1: ${Repositories.questions[index].a}",
+                                style: TextStyle(
+                                    fontSize: 18, color: Colors.white),
+                              ),
+                              Spacer(flex: 10),
+                              Text("2: ${Repositories.questions[index].b}",
                                   style: TextStyle(
-                                      fontSize: 20, color: Colors.white),
-                                ),
-                                Spacer(flex: 10),
-                                Text(
-                                  "1: ${Repositories.questions[index].a}",
+                                      fontSize: 18, color: Colors.white)),
+                              Spacer(flex: 10),
+                              Text("3: ${Repositories.questions[index].c}",
                                   style: TextStyle(
-                                      fontSize: 18, color: Colors.white),
-                                ),
-                                Spacer(flex: 10),
-                                Text("2: ${Repositories.questions[index].b}",
-                                    style: TextStyle(
-                                        fontSize: 18, color: Colors.white)),
-                                Spacer(flex: 10),
-                                Text("3: ${Repositories.questions[index].c}",
-                                    style: TextStyle(
-                                        fontSize: 18, color: Colors.white)),
-                                Spacer(flex: 10),
-                                Text("4: ${Repositories.questions[index].d}",
-                                    style: TextStyle(
-                                        fontSize: 18, color: Colors.white)),
-                                Spacer(flex: 10),
-                                Text(
-                                    "correct :${Repositories.questions[index].result.toString()}",
-                                    style: TextStyle(
-                                        fontSize: 18, color: Colors.blue)),
-                                Spacer(flex: 20),
-                              ],
-                            ),
+                                      fontSize: 18, color: Colors.white)),
+                              Spacer(flex: 10),
+                              Text("4: ${Repositories.questions[index].d}",
+                                  style: TextStyle(
+                                      fontSize: 18, color: Colors.white)),
+                              Spacer(flex: 10),
+                              Text(
+                                  "correct :${Repositories.questions[index].result.toString()}",
+                                  style: TextStyle(
+                                      fontSize: 18, color: Colors.blue)),
+                              Spacer(flex: 20),
+                            ],
                           ),
                         ),
-                      );
-                    },
-                  ),
+                      ),
+                    );
+                  },
                 ),
               ),
             ),
@@ -256,7 +271,7 @@ class _createState extends State<create> {
                       },
                       child: Text(
                         "corret reply: $cacheReply",
-                        style: content,
+                        style: TextStyle(fontSize: 20),
                       ),
                     ),
                     IconButton(
@@ -299,11 +314,12 @@ class _createState extends State<create> {
                           Icons.add,
                           size: 35,
                           color: Colors.white,
-                        ))
+                        )),
                   ],
                 ),
               ),
-            )
+            ),
+            SizedBox(height: 30),
           ],
         ),
       ),

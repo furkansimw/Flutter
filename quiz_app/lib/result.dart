@@ -1,5 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:quiz_app/Repositories.dart';
+import 'package:quiz_app/createSeltQuestion.dart';
 import 'package:quiz_app/main.dart';
 
 class result extends StatefulWidget {
@@ -9,17 +11,16 @@ class result extends StatefulWidget {
   _resultState createState() => _resultState();
 }
 
-var title = TextStyle(fontSize: 25, color: Colors.black);
-var content = TextStyle(fontSize: 20, color: Colors.white);
-var correntReplyNumber = 0;
+var currentReplyNumber = 0;
 
 class _resultState extends State<result> {
   @override
   void initState() {
+    currentReplyNumber = 0;
     for (var x = 0; x < Repositories.questions.length; x++) {
       if (Repositories.questions[x].result == replies[x]) {
         setState(() {
-          correntReplyNumber = correntReplyNumber + 1;
+          currentReplyNumber = currentReplyNumber + 1;
         });
       } else {
         null;
@@ -30,6 +31,9 @@ class _resultState extends State<result> {
 
   @override
   Widget build(BuildContext context) {
+    var screen = MediaQuery.of(context).size;
+    var title = TextStyle(fontSize: screen.width / 24, color: Colors.black);
+    var content = TextStyle(fontSize: screen.width / 24, color: Colors.white);
     return Scaffold(
       appBar: AppBar(),
       body: Column(
@@ -38,6 +42,7 @@ class _resultState extends State<result> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
+              Text("Question id", style: title),
               Text("Your Reply", style: title),
               Text("Correct Reply", style: title),
               Text("Result ", style: title),
@@ -46,28 +51,42 @@ class _resultState extends State<result> {
           Expanded(
             child: ListView.builder(
               padding: EdgeInsets.only(top: 15),
-              itemCount: replies.length,
+              itemCount: Repositories.questions.length,
               itemExtent: 100,
               itemBuilder: (context, index) {
                 return Padding(
                   padding: EdgeInsets.symmetric(horizontal: 14, vertical: 5),
                   child: Container(
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
+                        Spacer(flex: 5),
+                        Text(
+                          "question: ${index + 1}",
+                          style: content,
+                        ),
+                        Spacer(flex: 30),
                         Text("${replies[index]}", style: content),
+                        Spacer(flex: 30),
                         Text("${Repositories.questions[index].result}",
                             style: content),
+                        Spacer(flex: 30),
                         Text(
                             "${replies[index] == Repositories.questions[index].result}",
                             style: content),
+                        Spacer(flex: 30),
                       ],
                     ),
                     decoration: BoxDecoration(
                         gradient: LinearGradient(
-                          begin: Alignment.centerLeft,
-                          end: Alignment.centerRight,
-                          colors: [Colors.green, Colors.blue],
+                          begin: Alignment.centerRight,
+                          end: Alignment.centerLeft,
+                          colors: [
+                            replies[index] ==
+                                    Repositories.questions[index].result
+                                ? Colors.green
+                                : Colors.red,
+                            Colors.blue
+                          ],
                         ),
                         borderRadius: BorderRadius.all(Radius.circular(10))),
                   ),
@@ -76,15 +95,28 @@ class _resultState extends State<result> {
             ),
           ),
           Container(
-            width: 300,
-            height: 150,
+            width: screen.width / 3,
+            height: screen.height / 10,
             child: Center(
               child: Text(
-                "${Repositories.questions.length}/$correntReplyNumber",
-                style: TextStyle(fontSize: 32, color: Colors.black),
+                "${Repositories.questions.length}/$currentReplyNumber",
+                style: TextStyle(
+                    fontSize: 32,
+                    color:
+                        (Repositories.questions.length / currentReplyNumber == 1
+                            ? Colors.green
+                            : Colors.red)),
               ),
             ),
-          )
+          ),
+          CupertinoButton(
+              child: Text("Rety"),
+              onPressed: () {
+                replies.clear();
+                Navigator.pushReplacement(
+                    context, MaterialPageRoute(builder: (context) => create()));
+              }),
+          SizedBox(height: 20),
         ],
       ),
     );

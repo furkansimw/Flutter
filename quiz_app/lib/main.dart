@@ -14,7 +14,7 @@ class app extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Home(),
+      home: create(),
     );
   }
 }
@@ -41,20 +41,18 @@ var bColor = Colors.white;
 var cColor = Colors.white;
 var dColor = Colors.white;
 var nextQuestionButtonV = false;
+void all() {
+  aColor = Colors.white;
+  bColor = Colors.white;
+  cColor = Colors.white;
+  dColor = Colors.white;
+}
 
 class _HomeState extends State<Home> {
-  void all() {
-    aColor = Colors.white;
-    bColor = Colors.white;
-    cColor = Colors.white;
-    dColor = Colors.white;
-  }
-
   @override
   void initState() {
     setState(() {
-      var repositories = Repositories();
-      repositories.start();
+      replies.clear();
       work();
     });
     super.initState();
@@ -62,6 +60,7 @@ class _HomeState extends State<Home> {
 
   void work() {
     setState(() {
+      questionId = 0;
       question = Repositories.questions[questionId].question;
       a = Repositories.questions[questionId].a;
       b = Repositories.questions[questionId].b;
@@ -72,130 +71,84 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
+    var screen = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: Colors.blueGrey.shade300,
       appBar: AppBar(
         title: Text(" Question: ${questionId + 1}"),
-        actions: [
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10),
-            child: IconButton(
-              onPressed: () {
-                Navigator.pushReplacement(
-                    context, MaterialPageRoute(builder: (context) => create()));
-              },
-              icon: Icon(Icons.add),
-            ),
-          )
-        ],
       ),
       body: Column(
         children: [
-          SizedBox(height: 50),
+          SizedBox(height: screen.height / 20),
           Center(
             child: Container(
-              width: 400,
-              height: 350,
+              width: screen.width / 1.2,
+              height: screen.height / 3,
               color: Colors.grey.shade200,
               child: Column(
                 children: [
                   Padding(
-                    padding: EdgeInsets.symmetric(vertical: 40),
-                    child: Text("$question", style: TextStyle(fontSize: 30)),
+                    padding: EdgeInsets.only(top: screen.height / 15),
+                    child: Text("$question",
+                        style: TextStyle(fontSize: screen.width / 12)),
                   ),
                 ],
               ),
             ),
           ),
-          SizedBox(height: 40),
+          SizedBox(height: screen.height / 30),
           Container(
-            width: 450,
-            height: 350,
+            width: screen.width / 1.1,
+            height: screen.height / 3.1,
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          all();
-                          nextQuestionButtonV = true;
-                          aColor = selected;
-                          rep = 1;
-                        });
-                      },
-                      child: Container(
-                        width: 200,
-                        height: 125,
-                        color: aColor,
-                        child: Center(
-                            child: Text("$a", style: TextStyle(fontSize: 28))),
-                      ),
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          all();
-                          bColor = selected;
-                          nextQuestionButtonV = true;
-                          rep = 2;
-                        });
-                      },
-                      child: Container(
-                        width: 200,
-                        height: 125,
-                        color: bColor,
-                        child: Center(
-                            child: Text("$b", style: TextStyle(fontSize: 28))),
-                      ),
-                    ),
+                    button(aColor, screen, () {
+                      setState(() {
+                        all();
+                        rep = 1;
+                        aColor = selected;
+                        nextQuestionButtonV = true;
+                      });
+                    }),
+                    button(bColor, screen, () {
+                      setState(() {
+                        all();
+                        rep = 2;
+                        bColor = selected;
+                        nextQuestionButtonV = true;
+                      });
+                    })
                   ],
                 ),
+                SizedBox(height: screen.height / 30),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          all();
-                          cColor = selected;
-                          nextQuestionButtonV = true;
-                          rep = 3;
-                        });
-                      },
-                      child: Container(
-                        width: 200,
-                        height: 125,
-                        color: cColor,
-                        child: Center(
-                            child: Text("$c", style: TextStyle(fontSize: 28))),
-                      ),
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          all();
-                          dColor = selected;
-                          nextQuestionButtonV = true;
-                          rep = 4;
-                        });
-                      },
-                      child: Container(
-                        width: 200,
-                        height: 125,
-                        color: dColor,
-                        child: Center(
-                            child: Text("$d", style: TextStyle(fontSize: 28))),
-                      ),
-                    ),
+                    button(cColor, screen, () {
+                      setState(() {
+                        all();
+                        rep = 3;
+                        cColor = selected;
+                        nextQuestionButtonV = true;
+                      });
+                    }),
+                    button(dColor, screen, () {
+                      setState(() {
+                        all();
+                        rep = 4;
+                        dColor = selected;
+                        nextQuestionButtonV = true;
+                      });
+                    })
                   ],
                 ),
               ],
             ),
           ),
-          SizedBox(height: 25),
+          SizedBox(height: screen.height / 50),
           Visibility(
             visible: nextQuestionButtonV,
             child: GestureDetector(
@@ -214,8 +167,8 @@ class _HomeState extends State<Home> {
               },
               child: Container(
                 color: Colors.green,
-                width: 150,
-                height: 70,
+                width: screen.width / 2.8,
+                height: screen.height / 9.5,
                 child: Center(
                     child:
                         Text("Next Question", style: TextStyle(fontSize: 20))),
@@ -223,6 +176,35 @@ class _HomeState extends State<Home> {
             ),
           )
         ],
+      ),
+    );
+  }
+}
+
+class button extends StatefulWidget {
+  var selectedColorCache = Colors.white;
+
+  var xscreen;
+  VoidCallback func;
+  button(this.selectedColorCache, this.xscreen, this.func);
+  @override
+  _buttonState createState() => _buttonState();
+}
+
+class _buttonState extends State<button> {
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: widget.func,
+      child: Container(
+        decoration: BoxDecoration(
+            color: widget.selectedColorCache,
+            borderRadius: BorderRadius.all(Radius.circular(10))),
+        width: widget.xscreen.width / 2.5,
+        height: widget.xscreen.height / 7,
+        child: Center(
+            child: Text("$d",
+                style: TextStyle(fontSize: widget.xscreen.width / 16))),
       ),
     );
   }
