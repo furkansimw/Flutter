@@ -2,23 +2,31 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class recentFiles extends StatelessWidget {
+class recentFiles extends StatefulWidget {
   var x, y;
   recentFiles(this.x, this.y);
+
+  @override
+  _recentFilesState createState() => _recentFilesState();
+}
+
+class _recentFilesState extends State<recentFiles> {
   var style = TextStyle(
       fontWeight: FontWeight.bold,
       color: Colors.white,
       fontStyle: FontStyle.italic);
+
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: x * 0.05, vertical: y * 0.02),
+      padding: EdgeInsets.symmetric(
+          horizontal: widget.x * 0.05, vertical: widget.y * 0.02),
       child: Container(
         decoration: BoxDecoration(
             color: Color(0xff242736),
             borderRadius: BorderRadius.all(Radius.circular(10))),
-        height: y * 0.5,
-        width: x,
+        height: widget.y * 0.5,
+        width: widget.x,
         child: Column(
           children: [
             Row(
@@ -26,8 +34,8 @@ class recentFiles extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.all(15),
                   child: Text("Recent Files",
-                      style:
-                          TextStyle(fontSize: x * 0.05, color: Colors.white)),
+                      style: TextStyle(
+                          fontSize: widget.x * 0.05, color: Colors.white)),
                 ),
               ],
             ),
@@ -46,7 +54,7 @@ class recentFiles extends StatelessWidget {
               child: ListView.builder(
                 padding: EdgeInsets.only(top: 10),
                 itemCount: items.length,
-                itemExtent: y * 0.1,
+                itemExtent: 80,
                 itemBuilder: (context, index) {
                   return Padding(
                     padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
@@ -59,31 +67,35 @@ class recentFiles extends StatelessWidget {
                       child: Row(
                         children: [
                           SizedBox(
-                              width: x * 0.075,
+                              width: widget.x * 0.075,
+                              height: widget.y * 0.04,
                               child: FittedBox(
-                                  fit: BoxFit.fitHeight,
+                                  fit: BoxFit.fill,
                                   child:
                                       SvgPicture.asset(items[index].iconPath))),
                           Spacer(flex: 2),
                           SizedBox(
-                            width: x * 0.22,
+                            width: widget.x * 0.22,
                             child: Text(
                               items[index].name,
                               style: TextStyle(
-                                  fontSize: x * 0.045, color: Colors.white),
+                                  fontSize: widget.x * 0.045,
+                                  color: Colors.white),
                             ),
                           ),
                           Spacer(flex: 4),
                           SizedBox(
-                            width: x * 0.26,
+                            width: widget.x * 0.26,
                             child: Text(items[index].date,
                                 style: TextStyle(
-                                    fontSize: x * 0.04, color: Colors.white)),
+                                    fontSize: widget.x * 0.04,
+                                    color: Colors.white)),
                           ),
                           Spacer(flex: 4),
                           Text(items[index].size,
                               style: TextStyle(
-                                  fontSize: x * 0.045, color: Colors.white)),
+                                  fontSize: widget.x * 0.045,
+                                  color: Colors.white)),
                           Spacer(flex: 4),
                         ],
                       ),
@@ -91,7 +103,7 @@ class recentFiles extends StatelessWidget {
                   );
                 },
               ),
-            )
+            ),
           ],
         ),
       ),
