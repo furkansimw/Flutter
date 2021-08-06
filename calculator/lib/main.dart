@@ -36,7 +36,7 @@ class _HomeState extends State<Home> {
     void workStation(var number) {
       setState(() {
         switch (number) {
-          case "AC":
+          case "AC": //all delete
             number1 = 0;
             number2 = 0;
             result = 0;
@@ -48,10 +48,23 @@ class _HomeState extends State<Home> {
             result = number1;
             break;
           case "%":
+            number2 = number1;
+            number1 = 0;
+            procces = "%";
             break;
           case "÷":
             number2 = number1;
             procces = "÷";
+            number1 = 0;
+            break;
+          case "x":
+            number2 = number1;
+            procces = "x";
+            number1 = 0;
+            break;
+          case "-":
+            number2 = number1;
+            procces = "-";
             number1 = 0;
             break;
           case "+":
@@ -61,13 +74,16 @@ class _HomeState extends State<Home> {
             break;
           case "=":
             //result
-            if (procces == "÷") {
-              result = number2 / number1;
-            }
-            if (procces == "+") {
-              result = number1 + number2;
+            if (procces == "%") {
+              result = number2 % number1;
               number1 = result;
+              isDouble = true;
+              String resultStringType = result.toString();
+              if (resultStringType.contains(".0")) {
+                isDouble = false;
+              }
             }
+
             if (procces == "÷") {
               result = number2 / number1;
               number1 = result;
@@ -76,6 +92,21 @@ class _HomeState extends State<Home> {
               if (resultStringType.contains(".0")) {
                 isDouble = false;
               }
+            }
+
+            if (procces == "x") {
+              result = number2 * number1;
+              number1 = result;
+            }
+
+            if (procces == "-") {
+              result = number2 - number1;
+              number1 = result;
+            }
+
+            if (procces == "+") {
+              result = number1 + number2;
+              number1 = result;
             }
             break;
           case ".":
@@ -124,11 +155,6 @@ class _HomeState extends State<Home> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  Text(
-                    "$number1",
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  Text("$number2", style: TextStyle(color: Colors.white)),
                   Container(
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.end,
@@ -142,7 +168,7 @@ class _HomeState extends State<Home> {
                                   children: [
                                     Text("${result} ",
                                         style: TextStyle(
-                                            color: Colors.red,
+                                            color: Colors.white,
                                             fontSize: 95,
                                             fontWeight: FontWeight.w300)),
                                   ],
@@ -269,7 +295,7 @@ class button extends StatelessWidget {
                 child: Text("$number",
                     style: number == "AC" || number == "+/-" || number == "%"
                         ? TextStyle(
-                            fontSize: 29,
+                            fontSize: 27,
                             color: backgroundcolor == 2 ? Colors.black : white)
                         : TextStyle(
                             fontSize: 38,
@@ -289,3 +315,4 @@ class button extends StatelessWidget {
     );
   }
 }
+//:)
