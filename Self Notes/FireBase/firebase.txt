@@ -1,0 +1,91 @@
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(app());
+}
+
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
+
+-------------------------
+dev_dependencies:
+  cloud_firestore: ^2.0.0
+  firebase_core: ^1.1.0
+  flutter_test:
+    sdk: flutter
+-------------------------
+android-build.gradle
+8->
+dependencies {
+        
+        classpath 'com.google.gms:google-services:4.3.5'
+    }
+--------------------------------------------------
+andoid-app-build.gradle
+
+
+27->
+apply plugin: 'com.google.gms.google-services'
+
+
+43-> defaultConfig{
+
+   multiDexEnabled true
+
+}
+
+dependencies {
+
+    implementation platform('com.google.firebase:firebase-bom:27.1.0')
+}
+
+--------------------------------------------------
+
+veriEkle(){
+            FirebaseFirestore.instance
+            .collection('genel isim')  //kume ismi istenirse kontrol edilebilir
+            .doc(input1.text)   // kullanici giris ister! => 1.alt sinif ismi
+            .set({"ismi": input1.text});  //burada "isim" => field degisken adidir!  alan adlari
+        }
+
+    🎈🎈🎈🎈
+
+    veriGuncelleme(){
+        FirebaseFirestore.instance
+        .collection('genel isim')   //kume ismi istenirse kontrol edilebilir
+        .doc(input1.text)   // kullanici giris ister!  =>1.alt sinif ismi!
+        .update({"ismi": input1.text});  //burada "isim" => field degisken adidir!
+    }
+
+    🎈🎈🎈🎈
+
+    veriOkuma(){
+        FirebaseFirestore.instance
+        .collection('genel isim')   //kume ismi istenirse kontrol edilebilir
+        .doc(input1.text)   // kullanici giris ister!  =>1.alt sinif ismi arar!
+        .get()
+        .then((value) {
+            setState(() {
+            herhangibirdegisken = value.data()["alan adi"]  // alan adi arar mesela id , yas, isim vb
+            //devam edebilir sinirsinz! alanAdikadar
+            });
+        });
+    }
+
+    🎈🎈🎈🎈
+
+    veriSil(){
+
+        FirebaseFirestore.instance
+        .collection('genel isim')  // kume ismi istenirse kontrol edilebilir
+        .doc(input1.text)  // 1.alt sinif arama islemi
+        .delete();
+        //burasi 1.alt sinif full siler 
+    }
+
+    alanSil(){
+        FirebaseFirestore.instance
+                .collection('furkan')
+                .doc('a')
+                .update({'field': FieldValue.delete()});   // field isimli alan silindi!  furkan>a>field=X
+    }
