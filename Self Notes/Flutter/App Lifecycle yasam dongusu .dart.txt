@@ -1,0 +1,9 @@
+//class with WidgetsBindingObserver
+  // initState ve dispose e ekle -> WidgetsBinding.instance!.addObserver(this);
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    super.didChangeAppLifecycleState(state);
+    if (state == AppLifecycleState.resumed) {  //more
+      print('giris yapildi');
+    }
+  }
