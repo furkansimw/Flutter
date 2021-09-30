@@ -1,7 +1,11 @@
 cd C:\Users\mamif\AppData\Local\Android\Sdk\platform-tools
 
-
-
 adb devices
+
 adb tcpip 5555
-adb connect 'wifi ip':5555
+
+adb shell "ip addr show wlan0 | grep -e wlan0$ | cut -d\" \" -f 6 | cut -d/ -f 1"
+
+adb connect <ip_address>:5555
+
+adb logcat
