@@ -331,4 +331,4 @@ print(ornek1[keyismi]);
 -----------------------------------------------------------------------
 TextField(keyboardType: TextInputType.datetime)   => numarali klavye acar
 -----------------------------------------------------------------------
-
+ SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.top]); //bottom tool hide
