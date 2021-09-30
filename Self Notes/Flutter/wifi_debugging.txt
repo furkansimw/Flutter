@@ -1,0 +1,7 @@
+cd C:\Users\mamif\AppData\Local\Android\Sdk\platform-tools
+
+
+
+adb devices
+adb tcpip 5555
+adb connect 'wifi ip':5555
