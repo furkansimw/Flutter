@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "796395224860",
+    "project_id": "shining-wharf-305515",
+    "storage_bucket": "shining-wharf-305515.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:796395224860:android:624b80ab0e37583af0c4d9",
+        "android_client_info": {
+          "package_name": "com.example.chat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "796395224860-lspl0ol8c0u33ktb428k7t3tuvr7s6m9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCyxwcLCZWEdJCqyfhmybYZ_QapxwLpKlk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "796395224860-lspl0ol8c0u33ktb428k7t3tuvr7s6m9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,5 +1,8 @@
+import 'package:chat/screens/core.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:chat/models/const.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class login extends StatefulWidget {
   @override
@@ -7,6 +10,19 @@ class login extends StatefulWidget {
 }
 
 class _loginState extends State<login> {
+  void route() {
+    Future.delayed(Duration.zero, () {
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => core()));
+    });
+  }
+
+  @override
+  void initState() {
+    route();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext c) {
     return Scaffold(
@@ -57,8 +73,10 @@ class _loginState extends State<login> {
                         ),
                       ),
                     ),
-                    ElevatedButton(onPressed: () {}, child: Text('Login')),
-                    TextButton(onPressed: () {}, child: Text('Sign Up')),
+                    ElevatedButton(
+                        onPressed: () => _login(), child: Text('Login')),
+                    TextButton(
+                        onPressed: () => _signUp(), child: Text('Sign Up')),
                   ],
                 ),
               ),
@@ -68,6 +86,38 @@ class _loginState extends State<login> {
         ),
       ),
     );
+  }
+
+  _signUp() async {
+    try {
+      await FirebaseAuth.instance
+          .createUserWithEmailAndPassword(email: c1.text, password: c2.text)
+          .whenComplete(() => Navigator.pushReplacement(
+              context, MaterialPageRoute(builder: (context) => core())));
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'weak-password') {
+        styleData.TOAST("weak password");
+      } else if (e.code == 'email-already-in-use') {
+        styleData.TOAST("email elready in use");
+      }
+    } catch (e) {
+      styleData.TOAST(e.toString());
+    }
+  }
+
+  _login() async {
+    try {
+      await FirebaseAuth.instance
+          .signInWithEmailAndPassword(email: c1.text, password: c2.text)
+          .whenComplete(() => Navigator.pushReplacement(
+              context, MaterialPageRoute(builder: (context) => core())));
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        styleData.TOAST("user not found");
+      } else if (e.code == 'wrong-password') {
+        styleData.TOAST("wrong password");
+      }
+    }
   }
 }
 
