@@ -2,7 +2,7 @@
 
 A new Flutter project.
 ## double click camera change
-## one tap camera focu
+## one tap camera focus
 ## Getting Started
 
 This project is a starting point for a Flutter application.
