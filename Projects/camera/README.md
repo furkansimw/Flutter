@@ -1,8 +1,9 @@
 # flutter_application_1
 
 A new Flutter project.
+
 ## double click camera change
-## one tap camera focus
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
