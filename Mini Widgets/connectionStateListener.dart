@@ -1,3 +1,4 @@
+// flutter pub add connectivity
   void listen() async {
     //import 'package:connectivity/connectivity.dart'
     var subscription = Connectivity()
