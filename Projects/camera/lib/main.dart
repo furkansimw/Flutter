@@ -225,6 +225,7 @@ class _page2State extends State<page2> {
                               () {
                                 images.removeAt(i);
                                 widget.update();
+
                               },
                             );
                           },

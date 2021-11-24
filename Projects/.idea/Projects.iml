@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <excludeFolder url="file://$MODULE_DIR$/room device controller ui/build" />
+      <excludeFolder url="file://$MODULE_DIR$/room device controller ui/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/room device controller ui/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/TODO/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/TODO/build" />
+      <excludeFolder url="file://$MODULE_DIR$/TODO/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/responsive_admin_panel_or_dashboard ui/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/responsive_admin_panel_or_dashboard ui/build" />
+      <excludeFolder url="file://$MODULE_DIR$/responsive_admin_panel_or_dashboard ui/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/calculator/build" />
+      <excludeFolder url="file://$MODULE_DIR$/calculator/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/calculator/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/camera/build" />
+      <excludeFolder url="file://$MODULE_DIR$/camera/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/camera/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/repository/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/repository/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/repository/build" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="Dart SDK" level="project" />
+    <orderEntry type="library" name="Dart Packages" level="project" />
+  </component>
+</module>

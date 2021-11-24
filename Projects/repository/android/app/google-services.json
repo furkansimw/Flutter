@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "559472473709",
+    "project_id": "repository-9cdf3",
+    "storage_bucket": "repository-9cdf3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:559472473709:android:f6a0de367deb0df254f164",
+        "android_client_info": {
+          "package_name": "com.furkan.repository"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "559472473709-fk2o44q4d6cqnhtfkn419kuq5q0l3hjv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDR04s3W5iBquNoFSeSdvDh2qf-SzoRla4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "559472473709-fk2o44q4d6cqnhtfkn419kuq5q0l3hjv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
