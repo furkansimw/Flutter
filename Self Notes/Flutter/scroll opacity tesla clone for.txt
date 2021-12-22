@@ -1,0 +1,25 @@
+ //scroll witch cool opacity 
+@override
+  void initState() {
+    super.initState();
+    Future.delayed(const Duration(milliseconds: 1),
+        () => _controller.addListener(() => setState(() => set())));
+  }
+
+  void set() {
+    double page = _controller.page!;
+    double dot = _controller.page! % 1;
+
+    if (dot <= 0.1) {
+      opacity = 1;
+    }
+    if (dot > 0.1 && dot < 0.4) {
+      opacity = 1 - (dot * (dot * (dot * 15.6)));
+    }
+    if (dot >= 0.4 && dot < 0.9) {
+      opacity = dot * (dot * (dot * (dot * (dot * (dot * 1.88)))));
+    }
+    if (dot >= 0.9) {
+      opacity = 1;
+    }
+  }
