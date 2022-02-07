@@ -1,0 +1,5 @@
+Uint8List imageInUnit8List = {BYTE};
+final tempDir = await getTemporaryDirectory();
+File file = await File('${tempDir.path}/image.png').create();
+file.writeAsBytesSync(imageInUnit8List);
+//FILE HERE
